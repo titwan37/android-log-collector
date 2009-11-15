@@ -10,7 +10,7 @@ The collected log will be sent using an application of your choice.
 You also will have an opportunity to see and modify the data being sent."
     </string>
     <string name="device_info_fmt">
-Application version: <xliff:g id="application_version">%s</xliff:g>\n
+Log Collector version: <xliff:g id="application_version">%s</xliff:g>\n
 Device model: <xliff:g id="device_model">%s</xliff:g>\n
 Firmware version: <xliff:g id="firmware_revision">%s</xliff:g>\n
 Kernel version: <xliff:g id="kernel_version">%s</xliff:g>\n
