@@ -75,7 +75,7 @@ public class SendLogActivity extends Activity
     private Intent mSendIntent;
     private CollectLogTask mCollectLogTask;
     private ProgressDialog mProgressDialog;
-    private String mAddiitonalInfo;
+    private String mAdditonalInfo;
     private boolean mShowUi;
     private String[] mFilterSpecs;
     private String mFormat;
@@ -125,7 +125,7 @@ public class SendLogActivity extends Activity
                     mSendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
                 }
                 
-                mAddiitonalInfo = intent.getStringExtra(EXTRA_ADDITIONAL_INFO);
+                mAdditonalInfo = intent.getStringExtra(EXTRA_ADDITIONAL_INFO);
                 mShowUi = intent.getBooleanExtra(EXTRA_SHOW_UI, false);
                 mFilterSpecs = intent.getStringArrayExtra(EXTRA_FILTER_SPECS);
                 mFormat = intent.getStringExtra(EXTRA_FORMAT);
@@ -137,10 +137,10 @@ public class SendLogActivity extends Activity
             //standalone application
             mShowUi = true;
             mSendIntent = new Intent(Intent.ACTION_SEND);
-            intent.putExtra(EXTRA_ADDITIONAL_INFO, getString(R.string.device_info_fmt, getVersionNumber(this), Build.MODEL, Build.VERSION.RELEASE, getFormattedKernelVersion(), Build.DISPLAY));
             mSendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.message_subject));
             mSendIntent.setType("text/plain");//$NON-NLS-1$
-            
+
+            mAdditonalInfo = getString(R.string.device_info_fmt, getVersionNumber(this), Build.MODEL, Build.VERSION.RELEASE, getFormattedKernelVersion(), Build.DISPLAY);
             mFormat = "time";
         }
         
@@ -268,9 +268,9 @@ public class SendLogActivity extends Activity
                     log.delete(0, keepOffset);
                 }
                 
-                if (mAddiitonalInfo != null){
+                if (mAdditonalInfo != null){
                     log.insert(0, App.LINE_SEPARATOR);
-                    log.insert(0, mAddiitonalInfo);
+                    log.insert(0, mAdditonalInfo);
                 }
                 
                 mSendIntent.putExtra(Intent.EXTRA_TEXT, log.toString());
