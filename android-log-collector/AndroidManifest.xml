@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 Xtralogic, Inc.
+<!-- Copyright (C) 2012 Xtralogic, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -25,11 +25,12 @@
         android:smallScreens="true"
         android:anyDensity="true" />
     <uses-permission android:name="android.permission.READ_LOGS" />  
-    <application android:name="App" 
+    <application 
         android:icon="@drawable/launcher_icon" 
         android:label="@string/app_name">
         
-        <activity android:name=".SendLogActivity"
+        
+        <activity android:name="com.xtralogic.android.logcollector.lib.SendLogActivity"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
