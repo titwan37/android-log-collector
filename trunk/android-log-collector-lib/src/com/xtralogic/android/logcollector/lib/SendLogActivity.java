@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2012 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@
  */
 
 
-package com.xtralogic.android.logcollector;
+package com.xtralogic.android.logcollector.lib;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -58,7 +58,8 @@ import android.util.Log;
 
 public class SendLogActivity extends Activity 
 {
-    public final static String TAG = "com.xtralogic.android.logcollector";//$NON-NLS-1$
+    public final static String TAG = "AndroidLogCollector";//$NON-NLS-1$
+    public final static String LINE_SEPARATOR = System.getProperty("line.separator");//$NON-NLS-1$
 
     public static final String ACTION_SEND_LOG = "com.xtralogic.logcollector.intent.action.SEND_LOG";//$NON-NLS-1$
     public static final String EXTRA_SEND_INTENT_ACTION = "com.xtralogic.logcollector.intent.extra.SEND_INTENT_ACTION";//$NON-NLS-1$
@@ -93,17 +94,13 @@ public class SendLogActivity extends Activity
             if (ACTION_SEND_LOG.equals(action)){
                 String extraSendAction = intent.getStringExtra(EXTRA_SEND_INTENT_ACTION);
                 if (extraSendAction == null){
-                    Log.e(App.TAG, "Quiting, EXTRA_SEND_INTENT_ACTION is not supplied");//$NON-NLS-1$
+                    Log.e(TAG, "Quiting, EXTRA_SEND_INTENT_ACTION is not supplied");//$NON-NLS-1$
                     finish();
                     return;
                 }
                 
                 mSendIntent = new Intent(extraSendAction);
-                
-                Uri data = (Uri)intent.getParcelableExtra(EXTRA_DATA);
-                if (data != null){
-                    mSendIntent.setData(data);
-                }
+                mSendIntent.setType("text/plain");//$NON-NLS-1$
                 
                 String[] emails = intent.getStringArrayExtra(Intent.EXTRA_EMAIL);
                 if (emails != null){
@@ -249,11 +246,11 @@ public class SendLogActivity extends Activity
                 String line;
                 while ((line = bufferedReader.readLine()) != null){ 
                     log.append(line);
-                    log.append(App.LINE_SEPARATOR); 
+                    log.append(LINE_SEPARATOR); 
                 }
             } 
             catch (IOException e){
-                Log.e(App.TAG, "CollectLogTask.doInBackground failed", e);//$NON-NLS-1$
+                Log.e(TAG, "CollectLogTask.doInBackground failed", e);//$NON-NLS-1$
             } 
 
             return log;
@@ -269,7 +266,7 @@ public class SendLogActivity extends Activity
                 }
                 
                 if (mAdditonalInfo != null){
-                    log.insert(0, App.LINE_SEPARATOR);
+                    log.insert(0, LINE_SEPARATOR);
                     log.insert(0, mAdditonalInfo);
                 }
                 
