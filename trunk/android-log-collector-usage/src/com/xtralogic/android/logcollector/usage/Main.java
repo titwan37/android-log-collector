@@ -83,7 +83,7 @@ public class Main extends Activity {
             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int whichButton){
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(EXTRA_SEND_INTENT_ACTION, Intent.ACTION_SENDTO);
+                    intent.putExtra(EXTRA_SEND_INTENT_ACTION, Intent.ACTION_SEND);
                     final String email = "";
                     intent.putExtra(EXTRA_DATA, Uri.parse("mailto:" + email));
                     intent.putExtra(EXTRA_ADDITIONAL_INFO, "Additonal info: <additional info from the device (firmware revision, etc.)>\n");
